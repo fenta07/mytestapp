@@ -1,0 +1,883 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="mydb" Class="dbhandlerDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\mydb.mdf;Integrated Security=True;User Instance=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="mydbConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tbl_admin_info" Member="tbl_admin_infos">
+    <Type Name="tbl_admin_info">
+      <Column Name="adminName" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="EmailID" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="isLogin" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_scat" Member="tbl_scats">
+    <Type Name="tbl_scat">
+      <Column Name="pksid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="sname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="cname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="tbl_scat_tbl_product" Member="tbl_products" ThisKey="pksid" OtherKey="fksid" Type="tbl_product" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_company" Member="tbl_companies">
+    <Type Name="tbl_company">
+      <Column Name="pkcomid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="comname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="tbl_company_tbl_product" Member="tbl_products" ThisKey="pkcomid" OtherKey="fkcomid" Type="tbl_product" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_city" Member="tbl_cities">
+    <Type Name="tbl_city">
+      <Column Name="pkcity" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="cityname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="fkstateid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="tbl_state_tbl_city" Member="tbl_state" ThisKey="fkstateid" OtherKey="pkstateid" Type="tbl_state" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_state" Member="tbl_states">
+    <Type Name="tbl_state">
+      <Column Name="pkstateid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="statename" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="tbl_state_tbl_city" Member="tbl_cities" ThisKey="pkstateid" OtherKey="fkstateid" Type="tbl_city" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_feedback" Member="tbl_feedbacks">
+    <Type Name="tbl_feedback">
+      <Column Name="emailid" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="mobile" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="catagory" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="message" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_product" Member="tbl_products">
+    <Type Name="tbl_product">
+      <Column Name="pkprodid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="prodname" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="fkcomid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fksid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="mandate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="warryear" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="warrmonth" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="warrday" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="stock" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="prize" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="frontimage" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="backimage" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="modalid" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="modalname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="color" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="touch" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="simtype" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="callfeature" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="cpu" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="os" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ram" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="java" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="processer" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="displaysize" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="frontcamera" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="backcamera" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="bluethooth" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="wifi" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="[_2g]" Member="_2g" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="[_3g]" Member="_3g" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="gprs" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="internalmemory" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="externalmemory" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="weight" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="batterytype" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="harddisk" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="port" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="opticaldrive" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="graphicprocess" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="keybord" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="maxresoulution" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="lifestyle" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="hardwareinterface" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="systemarchitutecture" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="speaker" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="batterycell" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="lockport" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="tbl_company_tbl_product" Member="tbl_company" ThisKey="fkcomid" OtherKey="pkcomid" Type="tbl_company" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="tbl_scat_tbl_product" Member="tbl_scat" ThisKey="fksid" OtherKey="pksid" Type="tbl_scat" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_supplier" Member="tbl_suppliers">
+    <Type Name="tbl_supplier">
+      <Column Name="pksid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="supplier_ac_no" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="supplier_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="email_id" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="identy_id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="mobile" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="is_supplier" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Function Name="dbo.adminLogin" Method="adminLogin">
+    <Parameter Name="adminname" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="pass" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="adminLoginResult">
+      <Column Name="adminName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="EmailID" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="isLogin" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.adminLoginStatusUpdate" Method="adminLoginStatusUpdate">
+    <Parameter Name="adminname" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="is" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.adminChangePassword" Method="adminChangePassword">
+    <Parameter Name="adminname" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Opass" Parameter="opass" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="Npass" Parameter="npass" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="adminChangePasswordResult">
+      <Column Name="adminName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="EmailID" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="isLogin" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ScatInsert" Method="ScatInsert">
+    <Parameter Name="sname" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="cname" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ScatSelect" Method="ScatSelect">
+    <ElementType Name="ScatSelectResult">
+      <Column Name="pksid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="sname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="cname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ScatUpdate" Method="ScatUpdate">
+    <Parameter Name="cname" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="sname" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="pkid" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ScatDelete" Method="ScatDelete">
+    <Parameter Name="pksid" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ComInsert" Method="ComInsert">
+    <Parameter Name="comname" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ComSelect" Method="ComSelect">
+    <ElementType Name="ComSelectResult">
+      <Column Name="pkcomid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="comname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ComDelete" Method="ComDelete">
+    <Parameter Name="pkcomid" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ComUpdate" Method="ComUpdate">
+    <Parameter Name="pkcomid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="comname" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.StateInsert" Method="StateInsert">
+    <Parameter Name="statename" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.StateSelect" Method="StateSelect">
+    <ElementType Name="StateSelectResult">
+      <Column Name="pkstateid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="statename" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.StateUpdate" Method="StateUpdate">
+    <Parameter Name="pkstateid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="statename" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.StateDelete" Method="StateDelete">
+    <Parameter Name="pkstateid" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CitySelect" Method="CitySelect">
+    <ElementType Name="CitySelectResult">
+      <Column Name="pkstateid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="statename" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="pkcity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="cityname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="fkstateid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CityInsert" Method="CityInsert">
+    <Parameter Name="cityname" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="fkstateid" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CityUpdate" Method="CityUpdate">
+    <Parameter Name="fkstateid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="cityname" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="pkcity" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CityDelete" Method="CityDelete">
+    <Parameter Name="pkcity" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.FeedbackInsert" Method="FeedbackInsert">
+    <Parameter Name="emailid" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="mobile" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="catagory" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="message" Type="System.String" DbType="VarChar(200)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.SelectscatwithCate" Method="SelectscatwithCate">
+    <Parameter Name="cnm" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="SelectscatwithCateResult">
+      <Column Name="pksid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="sname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="cname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SelectMobileProducts" Method="SelectMobileProducts">
+    <ElementType Name="SelectMobileProductsResult">
+      <Column Name="pkprodid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="prodname" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="fkcomid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fksid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="mandate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="warryear" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="warrmonth" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="warrday" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="stock" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="prize" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="frontimage" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="backimage" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="modalid" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="modalname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="color" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="touch" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="simtype" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="callfeature" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="cpu" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="os" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ram" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="java" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="processer" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="displaysize" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="frontcamera" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="backcamera" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="bluethooth" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="wifi" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="[_2g]" Member="_2g" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="[_3g]" Member="_3g" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="gprs" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="internalmemory" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="externalmemory" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="weight" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="batterytype" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="harddisk" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="port" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="opticaldrive" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="graphicprocess" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="keybord" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="maxresoulution" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="lifestyle" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="hardwareinterface" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="systemarchitutecture" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="speaker" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="batterycell" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="lockport" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="comname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="sname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="cname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SelectMobileProductsById" Method="SelectMobileProductsById">
+    <Parameter Name="pid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="SelectMobileProductsByIdResult">
+      <Column Name="pkprodid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="prodname" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="fkcomid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fksid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="mandate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="warryear" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="warrmonth" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="warrday" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="stock" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="prize" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="frontimage" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="backimage" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="modalid" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="modalname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="color" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="touch" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="simtype" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="callfeature" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="cpu" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="os" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ram" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="java" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="processer" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="displaysize" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="frontcamera" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="backcamera" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="bluethooth" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="wifi" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="[_2g]" Member="_2g" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="[_3g]" Member="_3g" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="gprs" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="internalmemory" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="externalmemory" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="weight" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="batterytype" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="harddisk" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="port" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="opticaldrive" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="graphicprocess" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="keybord" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="maxresoulution" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="lifestyle" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="hardwareinterface" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="systemarchitutecture" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="speaker" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="batterycell" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="lockport" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="comname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="sname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="cname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SelectComputerProducts" Method="SelectComputerProducts">
+    <ElementType Name="SelectComputerProductsResult">
+      <Column Name="pkprodid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="prodname" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="fkcomid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fksid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="mandate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="warryear" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="warrmonth" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="warrday" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="stock" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="prize" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="frontimage" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="backimage" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="modalid" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="modalname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="color" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="touch" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="simtype" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="callfeature" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="cpu" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="os" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ram" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="java" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="processer" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="displaysize" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="frontcamera" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="backcamera" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="bluethooth" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="wifi" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="[_2g]" Member="_2g" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="[_3g]" Member="_3g" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="gprs" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="internalmemory" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="externalmemory" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="weight" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="batterytype" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="harddisk" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="port" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="opticaldrive" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="graphicprocess" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="keybord" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="maxresoulution" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="lifestyle" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="hardwareinterface" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="systemarchitutecture" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="speaker" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="batterycell" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="lockport" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="comname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="sname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="cname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SelectLeptopProducts" Method="SelectLeptopProducts">
+    <ElementType Name="SelectLeptopProductsResult">
+      <Column Name="pkprodid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="prodname" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="fkcomid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fksid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="mandate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="warryear" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="warrmonth" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="warrday" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="stock" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="prize" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="frontimage" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="backimage" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="modalid" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="modalname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="color" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="touch" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="simtype" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="callfeature" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="cpu" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="os" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ram" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="java" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="processer" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="displaysize" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="frontcamera" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="backcamera" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="bluethooth" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="wifi" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="[_2g]" Member="_2g" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="[_3g]" Member="_3g" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="gprs" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="internalmemory" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="externalmemory" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="weight" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="batterytype" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="harddisk" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="port" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="opticaldrive" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="graphicprocess" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="keybord" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="maxresoulution" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="lifestyle" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="hardwareinterface" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="systemarchitutecture" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="speaker" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="batterycell" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="lockport" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="comname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="sname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="cname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ProdctDelete" Method="ProdctDelete">
+    <Parameter Name="pkprodid" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ProdMobInsert" Method="ProdMobInsert">
+    <Parameter Name="prodname" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="fkcomid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="fksid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="mandate" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="warryear" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="warrmonth" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="warrday" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="stock" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="prize" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="frontimage" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="backimage" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="modalid" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="modalname" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="color" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="touch" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="simtype" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="callfeature" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="cpu" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="os" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="ram" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="java" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="processer" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="displaysize" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="frontcamera" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="backcamera" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="bluethooth" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="wifi" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="_2g" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="_3g" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="gprs" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="internalmemory" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="externalmemory" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="weight" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="batterytype" Type="System.String" DbType="VarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.SelectMobHome" Method="SelectMobHome">
+    <ElementType Name="SelectMobHomeResult">
+      <Column Name="pkprodid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="prodname" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="fkcomid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fksid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="mandate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="warryear" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="warrmonth" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="warrday" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="stock" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="prize" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="frontimage" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="backimage" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="modalid" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="modalname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="color" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="touch" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="simtype" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="callfeature" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="cpu" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="os" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ram" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="java" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="processer" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="displaysize" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="frontcamera" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="backcamera" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="bluethooth" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="wifi" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="[_2g]" Member="_2g" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="[_3g]" Member="_3g" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="gprs" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="internalmemory" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="externalmemory" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="weight" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="batterytype" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="harddisk" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="port" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="opticaldrive" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="graphicprocess" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="keybord" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="maxresoulution" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="lifestyle" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="hardwareinterface" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="systemarchitutecture" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="speaker" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="batterycell" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="lockport" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="comname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="sname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="cname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SelectComHome" Method="SelectComHome">
+    <ElementType Name="SelectComHomeResult">
+      <Column Name="pkprodid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="prodname" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="fkcomid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fksid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="mandate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="warryear" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="warrmonth" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="warrday" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="stock" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="prize" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="frontimage" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="backimage" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="modalid" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="modalname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="color" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="touch" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="simtype" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="callfeature" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="cpu" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="os" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ram" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="java" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="processer" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="displaysize" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="frontcamera" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="backcamera" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="bluethooth" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="wifi" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="[_2g]" Member="_2g" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="[_3g]" Member="_3g" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="gprs" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="internalmemory" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="externalmemory" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="weight" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="batterytype" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="harddisk" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="port" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="opticaldrive" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="graphicprocess" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="keybord" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="maxresoulution" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="lifestyle" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="hardwareinterface" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="systemarchitutecture" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="speaker" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="batterycell" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="lockport" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="comname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="sname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="cname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SelectAccHome" Method="SelectAccHome">
+    <ElementType Name="SelectAccHomeResult">
+      <Column Name="pkprodid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="prodname" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="fkcomid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fksid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="mandate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="warryear" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="warrmonth" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="warrday" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="stock" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="prize" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="frontimage" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="backimage" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="modalid" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="modalname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="color" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="touch" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="simtype" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="callfeature" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="cpu" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="os" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ram" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="java" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="processer" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="displaysize" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="frontcamera" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="backcamera" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="bluethooth" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="wifi" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="[_2g]" Member="_2g" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="[_3g]" Member="_3g" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="gprs" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="internalmemory" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="externalmemory" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="weight" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="batterytype" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="harddisk" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="port" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="opticaldrive" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="graphicprocess" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="keybord" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="maxresoulution" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="lifestyle" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="hardwareinterface" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="systemarchitutecture" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="speaker" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="batterycell" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="lockport" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="comname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="sname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="cname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SelectLepHome" Method="SelectLepHome">
+    <ElementType Name="SelectLepHomeResult">
+      <Column Name="pkprodid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="prodname" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="fkcomid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fksid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="mandate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="warryear" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="warrmonth" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="warrday" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="stock" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="prize" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="frontimage" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="backimage" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="modalid" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="modalname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="color" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="touch" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="simtype" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="callfeature" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="cpu" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="os" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ram" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="java" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="processer" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="displaysize" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="frontcamera" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="backcamera" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="bluethooth" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="wifi" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="[_2g]" Member="_2g" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="[_3g]" Member="_3g" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="gprs" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="internalmemory" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="externalmemory" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="weight" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="batterytype" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="harddisk" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="port" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="opticaldrive" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="graphicprocess" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="keybord" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="maxresoulution" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="lifestyle" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="hardwareinterface" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="systemarchitutecture" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="speaker" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="batterycell" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="lockport" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="comname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="sname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="cname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SelectAccessoriesProducts" Method="SelectAccessoriesProducts">
+    <ElementType Name="SelectAccessoriesProductsResult">
+      <Column Name="pkprodid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="prodname" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="fkcomid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fksid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="mandate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="warryear" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="warrmonth" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="warrday" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="stock" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="prize" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="frontimage" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="backimage" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="modalid" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="modalname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="color" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="touch" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="simtype" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="callfeature" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="cpu" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="os" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ram" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="java" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="processer" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="displaysize" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="frontcamera" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="backcamera" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="bluethooth" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="wifi" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="[_2g]" Member="_2g" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="[_3g]" Member="_3g" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="gprs" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="internalmemory" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="externalmemory" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="weight" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="batterytype" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="harddisk" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="port" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="opticaldrive" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="graphicprocess" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="keybord" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="maxresoulution" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="lifestyle" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="hardwareinterface" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="systemarchitutecture" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="speaker" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="batterycell" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="lockport" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="comname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="sname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="cname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SelectCitywithState" Method="SelectCitywithState">
+    <Parameter Name="stateid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="SelectCitywithStateResult">
+      <Column Name="pkcity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="cityname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="fkstateid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="pkstateid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="statename" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.UserInsert" Method="UserInsert">
+    <Parameter Name="FristName" Parameter="fristName" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="LastName" Parameter="lastName" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Gender" Parameter="gender" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="State" Parameter="state" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="City" Parameter="city" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="PIN" Parameter="pIN" Type="System.String" DbType="VarChar(6)" />
+    <Parameter Name="Address" Parameter="address" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="Mobile" Parameter="mobile" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(150)" />
+    <Parameter Name="Password" Parameter="password" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="Allow" Parameter="allow" Type="System.String" DbType="VarChar(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UserLogin" Method="UserLogin">
+    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(150)" />
+    <Parameter Name="Password" Parameter="password" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="UserLoginResult">
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Gender" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="State" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="City" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="PIN" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Mobile" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Allow" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.InsertSupplier" Method="InsertSupplier">
+    <Parameter Name="supplier_ac_no" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="suplier_name" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="email_id" Type="System.String" DbType="VarChar(150)" />
+    <Parameter Name="identy_id" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="mobile" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="is_supplier" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.SupplierSelect" Method="SupplierSelect">
+    <ElementType Name="SupplierSelectResult">
+      <Column Name="pksid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="supplier_ac_no" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="supplier_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="email_id" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="identy_id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="mobile" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="is_supplier" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SearchProduct" Method="SearchProduct">
+    <Parameter Name="sid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="keyword" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="SearchProductResult">
+      <Column Name="pkprodid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="prodname" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="fkcomid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fksid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="mandate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="warryear" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="warrmonth" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="warrday" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="stock" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="prize" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="frontimage" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="backimage" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="modalid" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="modalname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="color" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="touch" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="simtype" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="callfeature" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="cpu" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="os" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ram" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="java" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="processer" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="displaysize" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="frontcamera" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="backcamera" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="bluethooth" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="wifi" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="[_2g]" Member="_2g" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="[_3g]" Member="_3g" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="gprs" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="internalmemory" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="externalmemory" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="weight" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="batterytype" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="harddisk" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="port" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="opticaldrive" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="graphicprocess" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="keybord" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="maxresoulution" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="lifestyle" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="hardwareinterface" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="systemarchitutecture" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="speaker" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="batterycell" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="lockport" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="comname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="sname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="cname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+</Database>

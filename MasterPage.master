@@ -1,0 +1,200 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <link href="css/user_master.css" rel="stylesheet" type="text/css" />
+    <link href="css/css_menu.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .css1
+        {
+            z-index: 0;
+        }               
+        .css2
+        {
+            z-index: +300;
+        }
+        .box
+        {
+            width: 500px;
+            height: 250px;
+            border-radius: 100px 10px 100px 10px;
+            background-color: Green;
+            position: absolute;
+            right: 18px;
+            top: 70px;
+            display: none;
+            z-index: +400;
+        }
+        .style1
+        {
+        }
+        .style2
+        {
+            width: 22%;
+        }
+        .style3
+        {
+            width: 35%;
+        }
+    </style>
+    <script type="text/javascript">
+
+
+        function go() {
+            $("#menu_bar").toggle("slow");
+            $("#menu_top").toggle("slow");
+        }
+        function go1() {
+            $(".box").fadeToggle(2000);
+        }
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div id="w">
+        <div id="h" class="cssround">
+            <table width="100%">
+                <tr>
+                    <td class="title_" width="35%" rowspan="3">
+                        <br />
+                        FlipFlop
+                        <br />
+                    </td>
+                    <td rowspan="3" align="right" class="style3">
+                        &nbsp;<br />
+                        &nbsp;
+                        <br />
+                        &nbsp;
+                        <asp:TextBox ID="txtsearch" runat="server" placeholder="Search for a product, category or brand"
+                            Font-Names="Calibri" Font-Size="Medium" Width="340px" Height="30px"></asp:TextBox>
+                    </td>
+                    <td class="style1" rowspan="3">
+                        <a id="log" runat="server" href="#" onclick="go1()" style="position: absolute; right: 20px;
+                            font-size: medium; color: #FFFFFF; top: 44px; width: 63px; font-family: Calibri;">
+                            login!</a>
+                        <br />
+                        <br />
+                        <br />
+                        <asp:Button ID="btnsearch0" runat="server" Text="Search" Width="100px" Height="35px"
+                            BackColor="Yellow" Font-Names="Verdana" Font-Size="Large" ForeColor="#333333" />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </td>
+                    <td class="loginbtn" align="right" style="width: 22%">
+                        <asp:LinkButton ID="lbmyac" runat="server" Font-Names="Calibri" Font-Size="Medium"
+                            ForeColor="White" OnClick="lbmyac_Click">My Account</asp:LinkButton>
+                        &nbsp;
+                    </td>
+                    <td class="loginbtn">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td class="style2">
+                        &nbsp;
+                        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td class="style2">
+                        &nbsp;
+                    </td>
+                    <td style="width: 25%">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <div id="menu_">
+                            <ul id="menu">
+                                <li><a href="HomeUser.aspx">HomeHome</a> </li>
+                                <li><a href="Registration.aspx">Registration</a> </li>
+                                <li><a href="#">Computer</a> </li>
+                                <li><a href="#">Mobile</a> </li>
+                                <li><a href="#">Accessories</a></li>
+                                <li><a href="Feedback.aspx">Feedback</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="#">Sub Menu 1</a> </li>
+                                        <li><a href="#">Sub Menu 2</a> </li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">!OFFER ZONE!</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="box">
+            <table>
+                <tr>
+                    <td>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UserName
+                    </td>
+                    <td>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:TextBox ID="txtusername" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br />
+                        &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password
+                    </td>
+                    <td>
+                        <br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:TextBox ID="txtpassword" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="lblmsg" runat="server"></asp:Label>
+                    </td>
+                    <td>
+                        <br />
+                        &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<asp:Button ID="btnlogin" runat="server" Text="Login"
+                            OnClick="btnlogin_Click" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style="margin: 0px auto; width: 600px; margin-top: 10px;">
+            <div class="css1">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+        <div id="con" class="cssgradient">
+            <div>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+        <div id="foot">
+            <br />
+            <br />
+            <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Copyright (c) 2014 Online 
+            Mobile Computer Shopping&nbsp; FilpFlpo.Com&nbsp; All right reserverd
+            <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Design By 
+            JafarAli And ShabbirHasan</div>
+    </div>
+    </form>    
+</body>
+</html>
